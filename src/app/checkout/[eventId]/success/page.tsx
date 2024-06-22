@@ -4,7 +4,10 @@ import { cookies } from "next/headers";
 
 // queries
 export async function getEvent(eventId: string): Promise<EventModel> {
-  const response = await fetch(`http://localhost:8080/events/${eventId}`, {
+  const response = await fetch(`${process.env.GOLANG_API_URL}/events/${eventId}`, {
+    headers: {
+      'apikey': process.env.GOLANG_API_TOKEN as string
+    },
     cache: "no-store",
     next: {
       tags: [`events/${eventId}`],
